@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+        <!-- Team Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Tüm Kulüpler</h6>
+                <h1 class="mb-5">Kulüpler</h1>
+            </div>
+            <div class="position-relative mx-auto mb-4" style="">
+                <form class="form-inline my-2 my-lg-0" method = "GET" action = "">
+                    <input class="form-control border border-primary w-100 py-3 ps-4 pe-5" type="search" placeholder="Aranacak kelimeyi giriniz..." name="search">
+                    <button class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2" type="submit">Arama Yap</button>
+                </form>
+            </div>
+            <div class="row g-4">
+                {% for club in clubs %}
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid pt-4" src="{{ club.club_logo.url }}" style="
+                                display: block;
+                                margin-left: auto;
+                                margin-right: auto;
+                                width: 200px; "
+                            alt="">
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a class="btn btn-sm-square btn-primary mx-1" href="{% url 'club-detail' club.id %}"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href="{% url 'club-activity' club.id %}">
+                                    <i class="fa fa-star"></i>
+                                </a>
+                                {% comment %} <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a> {% endcomment %}
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">{{club.club_name}}</h5>
+                            {% comment %} <small>Designation</small> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+{% endblock %}

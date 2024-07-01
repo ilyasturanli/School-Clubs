@@ -1,0 +1,35 @@
+{% extends "sks/sks_layout.html" %}
+{% block content %}
+sa
+<div class="container">
+    <h2>Activity List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Activity Name</th>
+                <th>Is Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for activity in activities %}
+            <tr>
+                <td>{{ activity.activity_header }}</td>
+                <td>
+                    <form method="post" action="{% url 'toggle_activity' activity.id %}">
+                        {% csrf_token %}
+                        {{ activity_formset.management_form }}
+                        {{ activity_formset.non_form_errors }}
+                        {{ activity_formset.as_p }}
+                        {% if activity.activity_is_active == True %}
+                        <button class="btn btn-success" type="submit">Aktive</button>
+                        {% else %}
+                        <button class="btn btn-danger" type="submit">Passive</button>
+                        {% endif %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock  %}
